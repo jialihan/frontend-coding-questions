@@ -1,46 +1,12 @@
-/**
- * Check if two items are deep equal object
- * params can be any type
- *
- * @param {any} x
- * @param {any} y
- */
-// // WRONG: cycle bug in recursion
-// function deepEqual(x, y) {
-//   if (x === y) {
-//     return true;
-//   } else if (
-//     typeof x === "object" &&
-//     x !== null &&
-//     typeof y === "object" &&
-//     y !== null
-//   ) {
-//     if (Object.keys(x).length !== Object.keys(y).length) {
-//       return false;
-//     }
-//     for (let key of Object.keys(x)) {
-//       if (y.hasOwnProperty(key)) {
-//         if (!deepEqual(x[key], y[key])) {
-//           return false;
-//         }
-//       } else {
-//         return false;
-//       }
-//     }
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
+// _.isEqual is useful when you want to compare complex data types by value not the reference.
 
-// tests
-const a = { name: "jel", age: 18 };
-const b = { name: "jel", age: 17 };
-console.log(deepEqual(a, b)); // false
-console.log(deepEqual(undefined, a)); // false
-console.log(deepEqual(null, undefined)); // false
-console.log(deepEqual(undefined, a)); // false
-console.log(deepEqual(null, null)); // true
+// Can you implement your own version of deep equal isEqual? The lodash version covers a lot of data types. In this problem, you are asked to support :
+
+// 1. primitives
+// 2. plain objects (object literals)
+// 3. array
+
+// Objects are compared by their own, not inherited, enumerable properties
 
 /**
  * @param {any} a
