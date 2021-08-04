@@ -38,15 +38,3 @@ function deserialize(str) {
   }
   return deserializeHelper();
 }
-
-Sale.prototype.getPrice = function () {
-  var price = this.price,
-    i,
-    max = this.decorators_list.length,
-    name;
-  for (i = 0; i < max; i += 1) {
-    name = this.decorators_list[i];
-    price = Sale.decorators[name].getPrice(price);
-  }
-  return price;
-};
