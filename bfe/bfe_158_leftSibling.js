@@ -27,4 +27,3 @@ function previousLeftSibling(root, target) {
   }
   return null;
 }
-myExpect(null).not.toBe(undefined);
