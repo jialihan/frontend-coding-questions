@@ -55,3 +55,12 @@ window.myLocalStorage = {
 };
 // myLocalStorage.setItem('bfe', 'dev', 1000)
 // console.log(myLocalStorage.getItem('bfe'))
+
+// fetch(url).then(handleHttpError).then(...);
+function handleHttpError(res) {
+  if (!res.ok) {
+    // create error object and reject if not a 2xx response code
+    throw new Error("HTTP status code: " + res.status);
+  }
+  return res;
+}

@@ -55,29 +55,48 @@ function isLarger(num1, num2) {
 
 // Add Positive
 function addPositive(num1, num2) {
-  var s1 = reverseString(num1);
-  var s2 = reverseString(num2);
   var carry = 0;
-  var i = 0,
-    j = 0;
+  var i = num1.length - 1;
+  var j = num2.length - 1;
   var res = "";
-  while (i < s1.length || j < s2.length) {
+  while (i >= 0 || j >= 0) {
     var cur =
-      (s1[i] ? parseInt(s1[i]) : 0) + (s2[j] ? parseInt(s2[j]) : 0) + carry;
+      (i >= 0 ? parseInt(num1[i]) : 0) +
+      (j >= 0 ? parseInt(num2[j]) : 0) +
+      carry;
     carry = Math.floor(cur / 10);
     cur = cur % 10;
-    res += cur;
-    i++;
-    j++;
+    res = cur + res;
+    i--;
+    j--;
   }
   if (carry) {
-    res += carry;
+    res = carry + res;
   }
-  return reverseString(res);
+  return res;
+  // var s1 = reverseString(num1); // DONT NEED reverse
+  // var s2 = reverseString(num2);
+  // var carry = 0;
+  // var i = 0,
+  //   j = 0;
+  // var res = "";
+  // while (i < s1.length || j < s2.length) {
+  //   var cur =
+  //     (s1[i] ? parseInt(s1[i]) : 0) + (s2[j] ? parseInt(s2[j]) : 0) + carry;
+  //   carry = Math.floor(cur / 10);
+  //   cur = cur % 10;
+  //   res += cur;
+  //   i++;
+  //   j++;
+  // }
+  // if (carry) {
+  //   res += carry;
+  // }
+  // return reverseString(res);
 }
-function reverseString(str) {
-  return str.split("").reverse().join("");
-}
+// function reverseString(str) {
+//   return str.split("").reverse().join("");
+// }
 // Subtract - result always positive
 function subtract(num1, num2) {
   let i = num1.length - 1,
