@@ -2,6 +2,7 @@
 
 // Solution1: Object.toString.call(...)
 // MDN DOC:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString#using_tostring_to_detect_object_class%20
+// [Object, Object]
 /**
  * @param {any} data
  * @return {string}

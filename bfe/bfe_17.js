@@ -37,3 +37,34 @@ class NodeStore {
     return !!this.nodes[node._NODESTROE];
   }
 }
+
+// optimized: use Symbol & instance variable
+class NodeStore {
+  store = new Map();
+  nodeID = Symbol();
+  /**
+   * @param {Node} node
+   * @param {any} value
+   */
+  set(node, value) {
+    if (!node.nodeID) {
+      node.nodeID = Symbol();
+    }
+    this.store.set(node.nodeID, value);
+  }
+  /**
+   * @param {Node} node
+   * @return {any}
+   */
+  get(node) {
+    return this.store.get(node.nodeID);
+  }
+
+  /**
+   * @param {Node} node
+   * @return {Boolean}
+   */
+  has(node) {
+    return this.store.has(node.nodeID);
+  }
+}
