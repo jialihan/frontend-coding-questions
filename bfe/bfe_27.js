@@ -4,6 +4,8 @@
 // including Symbol & Enumerable & NON-Enumerable,
 // please reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors
 
+// Note:
+// If a descriptor has both [value or writable] and [get or set] keys, an exception is thrown.
 function completeAssign(target, ...sources) {
   if (target === null || target === undefined) {
     throw new Error("target is Not an object!");

@@ -46,6 +46,22 @@ function myFinally(promise, onFinally) {
       // 2. throw an error, promise gets rejected automatiaclly
     });
 }
+
+// finally(callback) {
+//   // 1. callback will never receive a parameter
+//   // 2. not change orignal promise result, EXCEPT throw an error in finally block, will reject with the error
+//   // 3. it will return another promise object
+//   // https://github.com/taylorhakes/promise-polyfill/blob/master/src/index.js
+//   return this.then(
+//     (value) => MyPromise.resolve(callback()).then(() => value),
+//     (reason) =>
+//       MyPromise.resolve(callback()).then(() => {
+//         // throw reason;
+//         return MyPromise.reject(reason);
+//       })
+//   );
+// }
+
 // test: throw error in finally
 // var mypromise = new Promise((resolve, reject) => {
 //   setTimeout(() => {

@@ -14,7 +14,7 @@ function detectType(data) {
   if (typeof data === "object") {
     return Object.prototype.toString
       .call(data)
-      .slice(1, -1)
+      .slice(1, -1) // '[object Number]'
       .split(" ")[1]
       .toLowerCase();
   }

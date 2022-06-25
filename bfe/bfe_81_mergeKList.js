@@ -12,15 +12,15 @@ function merge(arrList) {
     return arrList;
   }
   // Divide and Conquer
-  var pre = [...arrList[0]];
+  let cur = [...arrList[0]];
   for (var i = 1; i < arrList.length; i++) {
-    pre = mergeTwoList(pre, arrList[i]);
+    cur = mergeTwoList(cur, arrList[i]);
   }
-  return pre;
+  return cur;
 }
 function mergeTwoList(a, b) {
-  var res = [];
-  var i = 0,
+  let res = [];
+  let i = 0,
     j = 0;
   while (i < a.length && j < b.length) {
     if (a[i] < b[j]) {
