@@ -1,6 +1,15 @@
 // 22. implement JSON.parse()
 
 /**
+ * 6 types in JS:
+ * typeof 'abcdef': 'string'
+ * typeof true: 'boolean'
+ * typeof undefined: 'undefined': absence of definition
+ * typeof null: 'object': absence of value
+ * ES6 new type: typeof Symbol('unique') : 'symbol' , Symbol- docs} data
+ */
+
+/**
  * @param {string} str
  * @return {object | Array | string | number | boolean | null}
  */
