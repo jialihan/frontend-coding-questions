@@ -27,6 +27,12 @@
 How to tackle and break down this problem? it's much more easier from a API usage perspective.
 
 - Constructor: Promise // 构造函数
+  ```
+  const p0 = new Promise(); // ERROR throws
+  if (typeof func !== "function") {
+    throw "param must be a function!";
+  }
+  ```
 - Instance method:
 
   - // Promise.prototype.then
@@ -41,12 +47,30 @@ How to tackle and break down this problem? it's much more easier from a API usag
 
 Internal State (life cycle of a promise):
 
-- \_state === 0 // pending，当前 Promise 正在执行中
+- \_state === 0 // pending，当前 Promise 正在执行中, which is default
+  ```
+  const p1 = new Promise((resolve, reject) => {});
+  console.log("default p1: ", p1); // state is pending
+  ```
 - \_state === 1 // fulfilled, 表示执行了 `resolve` 函数，并且 `_value` instanceof Promise === true
 - \_state === 2 // rejected, 表示执行了`reject` 函数
 - \_state === 3 // fulfilled, 执行了 `resolve 函数，并且\_value instanceof Promise === false
 
 > Note: we can merge and simply state 1 & 3 means fulfilled & resolved, will be easier for our own implementation.
+
+**Throw error:**
+
+```
+// if throw an error, it defaults to reject
+const p1 = new Promise((resolve, reject) => {
+  throw "error";
+});
+
+Promise {<rejected>: 'error'}
+[[Prototype]]: Promise
+[[PromiseState]]: "rejected"
+[[PromiseResult]]: "error"
+```
 
 <div id="question1" />
 
@@ -77,6 +101,16 @@ constructor(executor) {
 <div id="question2" />
 
 ### 2. internal executor/resolver
+
+Need to `bind(this)` in `func(this.resolve.bind(this), this.reject.bind(this));`, otherwise the below error:
+
+```
+promise.js:21 Uncaught TypeError: Cannot read properties of undefined (reading 'state')
+    at resolve (promise.js:21:14)
+    at promise.js:36:3
+    at new MyPromise (promise.js:18:5)
+    at promise.js:35:12
+```
 
 We need a internal method to dispatch our "2 fns" as parameter, and we need more logic to dispatch those two functions by promise state internally.
 
@@ -188,7 +222,17 @@ finale() {
 
 ### 4. then() method
 
-This is really important how we chain values in the promise object, and remember `then()` should always return another promise object with chained value.
+This is really important how we chain values in the promise object, and remember `then()` should always return another promise object with chained value. For example, the basic usage of `then()`:
+
+```
+  promise.then(
+    res => res.json(),
+    error => {
+         console.log(error.message);
+		 return undefined;
+     }
+ )
+```
 
 Here the most easy way is to pass the two register functions "onFulfilled" & "onRejected" directly to the `handle()` method.
 
@@ -241,6 +285,21 @@ Use cases for "then()":
 
 - `pro.then(4);` skip and pass, original promise result NOT changed
 - `pro.then(()=>pro2).then((data)=>console.log(data))` can chained the previous promise result
+
+#### 4.1 Chained then() value
+
+Promise/A+: [doc](https://promisesaplus.com/#the-then-method)
+
+**2.2.7 then must return a promise.**
+
+```
+promise2 = promise1.then(onFulfilled, onRejected);
+```
+
+- If either onFulfilled or onRejected returns a value x, run the Promise Resolution Procedure `[[Resolve]](promise2, x)`.
+- If either onFulfilled or onRejected throws an exception e, promise2 must be rejected with e as the reason.
+- If onFulfilled is not a function and promise1 is fulfilled, promise2 must be fulfilled with the same value as promise1.
+- If onRejected is not a function and promise1 is rejected, promise2 must be rejected with the same reason as promise1.
 
 <div id="question5" />
 
