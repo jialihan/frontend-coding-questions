@@ -10,6 +10,8 @@ function flat(arr, depth = 1) {
     : arr;
 }
 
+// Tip: arr.toString().split('').map(e=>parseInt(e));
+
 // 2. iterative
 // Use queue model:
 // - dequeue at the front
