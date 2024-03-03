@@ -1,3 +1,4 @@
+// Question link: https://bigfrontend.dev/problem/implement-curry
 // const join = (a, b, c) => {
 //     return `${a}_${b}_${c}`
 //  }
@@ -24,4 +25,5 @@ function curry(fn) {
 }
 
 // NOTE: function.length
+// mdn doc: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
 // the original parameter length of the function statement
