@@ -1,3 +1,17 @@
+// MDN doc: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+// Case 1: Evaluation result is the same as using ===
+Object.is(null, null); // true
+Object.is(undefined, undefined); // true
+
+// Case 2: Signed zero
+Object.is(0, -0); // false
+Object.is(+0, -0); // false
+Object.is(-0, -0); // true
+
+// Case 3: NaN
+Object.is(NaN, 0 / 0); // true
+Object.is(NaN, Number.NaN); // true
+
 function myExpect(input) {
   var neg = false;
   return {
@@ -10,7 +24,7 @@ function myExpect(input) {
     get not() {
       neg = !neg;
       return this;
-    }
+    },
   };
 }
 
