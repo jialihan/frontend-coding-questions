@@ -18,6 +18,7 @@ const myExtends = (SuperType, SubType) => {
 
   // For test case: ExtendedType.prototype should be SuperType
   // NOT needed on creating instances
+  // only for edge cases eg: SuperType.boo = 'abc', then Child.boo = 'abc'.
   Child.__proto__ = SuperType;
 
   return Child;
@@ -51,10 +52,11 @@ console.log(jel);
 
 var Student = function () {
   this.sid = 11120;
-  // // set prototype on ALL instances
-  // Object.setPrototypeOf(this, Person.prototype);
-  // this.__proto__ = Person.prototype;
 };
+// // set prototype on ALL instances
+// Object.setPrototypeOf(this, Person.prototype);
+// this.__proto__ = Person.prototype;
+// };
 // // static method add proto link
 // Student.__proto__ = Person;
 // Object.setPrototypeOf(Student, Person);
