@@ -39,3 +39,33 @@ function all(promises) {
     }
   });
 }
+
+/**
+ * Version 2
+ * @param {Array} iterable
+ * @return {Promise<Array>}
+ */
+export default function promiseAll(iterable) {
+  if (iterable.length == 0) {
+    return Promise.resolve([]);
+  }
+  const res = [];
+  const n = iterable.length;
+  let count = n;
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < n; i++) {
+      Promise.resolve(iterable[i]).then(
+        (resp) => {
+          res[i] = resp;
+          count--;
+          if (count === 0) {
+            resolve(res);
+          }
+        },
+        (err) => {
+          reject(err);
+        },
+      );
+    } // end for
+  });
+}
